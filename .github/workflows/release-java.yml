@@ -38,7 +38,7 @@ jobs:
       - name: Run sample Java Client
         run: . .github/workflows/function.sh && run_sample
       - name: Publish to the Maven Central Repository
-        run: cd java_client && mvn clean --batch-mode deploy
+        run: echo "mlem mlem" #cd java_client && mvn clean --batch-mode deploy
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
