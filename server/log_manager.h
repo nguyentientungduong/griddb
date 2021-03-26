@@ -21,6 +21,7 @@
 #ifndef LOG_MANAGER_H_
 #define LOG_MANAGER_H_
 
+#include "gs_error.h"
 #include "data_store_common.h"
 #include "transaction_context.h"
 #include "config_table.h"

@@ -1434,7 +1434,7 @@ private:
 		BNode<K, V> &dirtyNode2, KeyValue<K, V> &val) {
 		val = dirtyNode1.getKeyValue(nodeMinSize_);
 		OId node2Id;
-		dirtyNode2.allocateNeighbor<BNodeImage<K, V> >(
+		dirtyNode2.template allocateNeighbor<BNodeImage<K, V> >(
 			getNormalNodeSize<K, V>(getElemSize<K, V>()), allocateStrategy_, node2Id,
 			dirtyNode1.getSelfOId(), OBJECT_TYPE_BTREE_MAP);
 
@@ -1870,7 +1870,7 @@ void BtreeMap::split(TransactionContext &txn, BNode<K, V> &dirtyNode1,
 		BNode<K, V> dirtyParentNode(
 			txn, *getObjectManager(), allocateStrategy_);
 		if (dirtyNode1.isRoot()) {
-			dirtyParentNode.allocateNeighbor<BNodeImage<K, V> >(
+			dirtyParentNode.template allocateNeighbor<BNodeImage<K, V> >(
 				getNormalNodeSize<K, V>(getElemSize<K, V>()), allocateStrategy_, parentOId,
 				dirtyNode1.getSelfOId(), OBJECT_TYPE_BTREE_MAP);
 			dirtyParentNode.initialize(
@@ -2148,7 +2148,7 @@ bool BtreeMap::insertInternal(
 			BNode<K, V> dirtyNewNode(
 				txn, *getObjectManager(), allocateStrategy_);
 			OId newNodeOId;
-			dirtyNewNode.allocate<BNodeImage<K, V> >(getNormalNodeSize<K, V>(getElemSize<K, V>()),
+			dirtyNewNode.template allocate<BNodeImage<K, V> >(getNormalNodeSize<K, V>(getElemSize<K, V>()),
 				allocateStrategy_, newNodeOId, OBJECT_TYPE_BTREE_MAP);
 			dirtyNewNode.initialize(
 				txn, newNodeOId, true, nodeMaxSize_, elemSize_);
@@ -2292,7 +2292,7 @@ bool BtreeMap::removeInternal(
 			BNode<K, V> dirtyNewNode(
 				txn, *getObjectManager(), allocateStrategy_);
 			OId newNodeOId;
-			dirtyNewNode.allocate<BNodeImage<K, V> >(getInitialNodeSize<K, V>(getElemSize<K, V>()),
+			dirtyNewNode.template allocate<BNodeImage<K, V> >(getInitialNodeSize<K, V>(getElemSize<K, V>()),
 				allocateStrategy_, newNodeOId, OBJECT_TYPE_BTREE_MAP);
 			dirtyNewNode.initialize(txn, dirtyNewNode.getBaseOId(), true,
 				getInitialItemSizeThreshold<K, V>(), elemSize_);

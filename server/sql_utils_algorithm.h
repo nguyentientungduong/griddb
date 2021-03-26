@@ -1896,7 +1896,7 @@ inline bool SQLAlgorithmUtils::HeapElement<T>::next() const {
 template<typename T>
 template<typename U>
 inline bool SQLAlgorithmUtils::HeapElement<T>::nextAt() const {
-	return value_.nextAt<U>();
+	return value_.template nextAt<U>();
 }
 
 

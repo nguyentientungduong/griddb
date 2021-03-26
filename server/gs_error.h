@@ -256,8 +256,8 @@ inline bool InterruptionChecker::check() {
 		tracer, level, GS_TRACE_NAMED_CODE(code), message, cause)
 #define GS_TRACE_ERROR(tracer, code, message) \
 	GS_TRACER_PUT(tracer, LEVEL_ERROR, code, message, NULL)
-#define GS_TRACE_WARNING(tracer, code, message) \
-	GS_TRACER_PUT(tracer, LEVEL_WARNING, code, message, NULL)
+#define GS_TRACE_WARNING(tracer, code, messagecpp) \
+	GS_TRACER_PUT(tracer, LEVEL_WARNING, code, NULL, NULL)
 #define GS_TRACE_INFO(tracer, code, message) \
 	GS_TRACER_PUT(tracer, LEVEL_INFO, code, message, NULL)
 #define GS_TRACE_DEBUG(tracer, code, message) \

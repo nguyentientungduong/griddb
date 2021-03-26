@@ -4756,13 +4756,13 @@ inline void ObjectCoder::Impl::decodeInternal(
 		C &coder, S &stream, T &value, const Attribute &attr,
 		const Traits&, const TypeTag<TYPE_LIST>&) {
 	typedef typename T::value_type ElementType;
-
+	//struct T::value_type var;
 	size_t size;
 	typename S::ListScope scope(stream, size, attr);
 	value.reserve(size);
 
 	for (size_t r = size; r > 0; r--) {
-		value.push_back(coder.create<ElementType>());
+		value.push_back(coder.template create<ElementType>());
 		coder.decodeBy(
 				coder, scope.stream(), value.back(), attr,
 				filterTraitsForMembers(Traits()));
@@ -4815,9 +4815,9 @@ void ObjectCoder::Impl::decodeInternal(
 		return;
 	}
 
-	value = coder.create<T>();
+	value = coder.template create<T>();
 
-	coder.decodeBy(
+	coder.template decodeBy(
 			coder, scope.stream(), *value, attr, OptionalObjectCoding());
 }
 

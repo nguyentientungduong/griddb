@@ -20,7 +20,7 @@
 */
 
 #include "log_manager.h"
-#include "gs_error.h"
+
 #include "util/time.h"
 #include "util/trace.h"
 #include "chunk_manager.h"
