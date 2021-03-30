@@ -20,7 +20,7 @@
 */
 
 #include "log_manager.h"
-
+#include "gs_error.h"
 #include "util/time.h"
 #include "util/trace.h"
 #include "chunk_manager.h"
@@ -624,9 +624,9 @@ LogSequentialNumber LogManager::putPutContainerLog(
 					oss << "setLogversion failed. pId=" << pId <<
 					  ", reason=(" << GS_EXCEPTION_MESSAGE(e) << ")";
 					childLogManagerList_[pId]->setLongtermSyncLogError(oss.str());
-					childLogManagerList_[pId] = NULL; 
-					GS_TRACE_WARNING(
-						LOG_MANAGER, GS_TRACE_LM_PUT_SYNC_TEMP_LOG_FAILED, oss);
+					childLogManagerList_[pId] = NULL;
+ 					GS_TRACE_WARNING(
+						LOG_MANAGER, GS_TRACE_LM_PUT_SYNC_TEMP_LOG_FAILED, oss.str());
 				}
 			}
 		}
@@ -1369,7 +1369,7 @@ void LogManager::prepareCheckpoint(PartitionGroupId pgId, CheckpointId cpId) {
 				childLogManagerList_[pId]->setLongtermSyncLogError(oss.str());
 				childLogManagerList_[pId] = NULL; 
 				GS_TRACE_WARNING(LOG_MANAGER,
-						GS_TRACE_LM_PREPARE_CHECKPOINT_FAILED, oss);
+						GS_TRACE_LM_PREPARE_CHECKPOINT_FAILED, oss.str());
 			}
 		}
 	}
@@ -1403,7 +1403,7 @@ void LogManager::postCheckpoint(PartitionGroupId pgId) {
 				childLogManagerList_[pId]->setLongtermSyncLogError(oss.str());
 				childLogManagerList_[pId] = NULL; 
 				GS_TRACE_WARNING(LOG_MANAGER,
-						GS_TRACE_LM_POST_CHECKPOINT_FAILED, oss);
+						GS_TRACE_LM_POST_CHECKPOINT_FAILED, oss.str());
 			}
 		}
 	}
@@ -1437,7 +1437,7 @@ void LogManager::writeBuffer(PartitionGroupId pgId) {
 				childLogManagerList_[pId]->setLongtermSyncLogError(oss.str());
 				childLogManagerList_[pId] = NULL; 
 				GS_TRACE_WARNING(LOG_MANAGER,
-						GS_TRACE_LM_FLUSH_SYNC_TEMP_LOG_FAILED, oss);
+						GS_TRACE_LM_FLUSH_SYNC_TEMP_LOG_FAILED, oss.str());
 			}
 		}
 	}
@@ -1470,7 +1470,7 @@ void LogManager::flushFile(PartitionGroupId pgId, bool executeChildren) {
 					childLogManagerList_[pId]->setLongtermSyncLogError(oss.str());
 					childLogManagerList_[pId] = NULL; 
 					GS_TRACE_WARNING(LOG_MANAGER,
-							GS_TRACE_LM_FLUSH_SYNC_TEMP_LOG_FAILED, oss);
+							GS_TRACE_LM_FLUSH_SYNC_TEMP_LOG_FAILED, oss.str());
 				}
 			}
 		}
@@ -2095,7 +2095,7 @@ void LogManager::putLog(PartitionId pId, LogSequentialNumber lsn,
 			childLogManagerList_[pId]->setLongtermSyncLogError(oss.str());
 			childLogManagerList_[pId] = NULL; 
 			GS_TRACE_WARNING(
-					LOG_MANAGER, GS_TRACE_LM_PUT_SYNC_TEMP_LOG_FAILED, oss);
+					LOG_MANAGER, GS_TRACE_LM_PUT_SYNC_TEMP_LOG_FAILED, oss.str());
 		}
 	}
 }
